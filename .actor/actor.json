@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "software-reviews-scraper",
   "title": "TrustRadius Reviews Scraper – Software Reviews",
-  "description": "Scrapes B2B software reviews from TrustRadius: rating, pros, cons, use cases, likelihood to recommend and date, plus product rating. Unofficial TrustRadius API for competitor and market research. US$1.50 per 1,000 reviews. No reviewer names. Optional AI insights with your own Gemini/OpenAI key: US$0.20 per 1,000 reviews analyzed (from 4 Nov 2026).",
+  "description": "Scrapes B2B software reviews from TrustRadius: rating, pros, cons, use cases, likelihood to recommend and date, plus product rating. Unofficial TrustRadius API for competitor and market research. US$1.50 per 1,000 reviews. No reviewer names. Optional AI insights with your own Gemini/OpenAI key: US$0.20 per 1,000 reviews analyzed.",
   "version": "0.1",
   "buildTag": "latest",
   "input": "./input_schema.json",
