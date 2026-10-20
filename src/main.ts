@@ -70,7 +70,8 @@ else if (wantAi) {
       const j: any = await r.json();
       if (!r.ok) throw new Error(`HTTP ${r.status}: ${j?.error?.message ?? 'unknown'}`);
       const parsed = JSON.parse(j.choices[0].message.content);
-      await Actor.pushData({ type: 'ai-summary', source: 'trustradius', productSlug: p.slug, productName: names.get(p.slug) ?? null, reviewsAnalyzed: reviews.length, ...parsed, scrapedAt: now }); // not charged (beta)
+      await Actor.pushData({ type: 'ai-summary', source: 'trustradius', productSlug: p.slug, productName: names.get(p.slug) ?? null, reviewsAnalyzed: reviews.length, ...parsed, scrapedAt: now }); 
+      if ('review-analyzed' in Actor.getChargingManager().getPricingInfo().perEventPrices) await Actor.charge({ eventName: 'review-analyzed', count: Math.min(reviews.length, 200) });
       log.info(`${p.slug}: AI summary saved.`);
     } catch (e) { log.error(`${p.slug}: AI summary failed (${(e as Error).message}). Not charged.`); }
   }

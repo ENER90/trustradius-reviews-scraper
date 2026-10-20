@@ -45,7 +45,7 @@
       "type": "boolean",
       "default": false,
       "sectionCaption": "AI summary (optional)",
-      "description": "Adds one AI row per product (sentiment, top pros/cons, complaints). Needs your own OpenAI-compatible or Gemini API key; the AI cost is billed by your provider. Off by default."
+      "description": "Adds one AI row per product (sentiment, top pros/cons, complaints). Needs your own OpenAI-compatible or Gemini API key; US$0.20 per 1,000 reviews analyzed from 4 Nov 2026 (free until then); AI tokens are billed by your provider. Off by default."
     },
     "aiProvider": {
       "title": "AI provider",
