@@ -1,10 +1,11 @@
 import { Actor, log } from 'apify';
+import { runAiInsights } from './ai.js';
 import { PlaywrightCrawler } from 'crawlee';
 import { parseProduct, pageUrl, parseReviews, parseProductMeta, isChallenge, summaryPrompt, ProductRef, ReviewRecord } from './parsers.js';
 
 interface Input {
   startUrls?: ({ url: string } | string)[]; products?: string[]; maxReviewsPerProduct?: number; includeProductInfo?: boolean; includeReviewerInfo?: boolean;
-  aiSummary?: boolean; aiApiKey?: string; aiBaseUrl?: string; aiModel?: string; proxyConfiguration?: any;
+  aiSummary?: boolean; aiProvider?: 'openai' | 'gemini'; aiLanguage?: string; aiApiKey?: string; aiBaseUrl?: string; aiModel?: string; proxyConfiguration?: any;
 }
 await Actor.init();
 const input = (await Actor.getInput<Input>()) ?? {};
@@ -57,7 +58,9 @@ const crawler = new PlaywrightCrawler({
 });
 await crawler.run(products.map((p) => ({ url: pageUrl(p, 1), userData: { product: p, page: 1 } })));
 
-if (wantAi) {
+const useGemini = wantAi && (input.aiProvider === 'gemini' || input.aiApiKey!.startsWith('AIza'));
+if (useGemini) await runAiInsights({ aiInsights: true, aiProvider: 'gemini', aiApiKey: input.aiApiKey, aiModel: input.aiModel === 'gpt-4o-mini' ? undefined : input.aiModel, aiLanguage: input.aiLanguage }, 'trustradius');
+else if (wantAi) {
   for (const p of products) {
     const reviews = got.get(p.slug) ?? []; if (reviews.length < 3) continue;
     try {

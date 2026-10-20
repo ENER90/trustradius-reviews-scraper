@@ -45,21 +45,35 @@
       "type": "boolean",
       "default": false,
       "sectionCaption": "AI summary (optional)",
-      "description": "Adds one row per product with sentiment, top pros/cons and complaints. Needs your own OpenAI-compatible API key. Beta: not charged."
+      "description": "Adds one AI row per product (sentiment, top pros/cons, complaints). Needs your own OpenAI-compatible or Gemini API key; the AI cost is billed by your provider. Off by default."
+    },
+    "aiProvider": {
+      "title": "AI provider",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "gemini",
+        "openai"
+      ],
+      "enumTitles": [
+        "Google Gemini",
+        "OpenAI"
+      ],
+      "description": "Leave empty to auto-detect from the key (Gemini keys start with 'AIza')."
     },
     "aiApiKey": {
       "title": "AI API key",
       "type": "string",
       "editor": "textfield",
       "isSecret": true,
-      "description": "OpenAI (or compatible) key. Used only for the summary call; never logged."
+      "description": "OpenAI-compatible or Gemini (starts with 'AIza') key. Used only for the AI calls; never logged."
     },
     "aiBaseUrl": {
       "title": "AI base URL",
       "type": "string",
       "editor": "textfield",
       "default": "https://api.openai.com/v1",
-      "description": "Any OpenAI-compatible endpoint (OpenAI, OpenRouter, xAI, Groq\u2026)."
+      "description": "Any OpenAI-compatible endpoint (OpenAI, OpenRouter, xAI, Groq…)."
     },
     "aiModel": {
       "title": "AI model",
@@ -67,6 +81,13 @@
       "editor": "textfield",
       "default": "gpt-4o-mini",
       "description": "Model name for the endpoint."
+    },
+    "aiLanguage": {
+      "title": "AI output language",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Language of the AI text (e.g. English, Spanish, Portuguese).",
+      "default": "English"
     },
     "proxyConfiguration": {
       "title": "Proxy",

@@ -2,7 +2,7 @@
 
 > **Source: TrustRadius only.** G2 and Capterra are currently **not supported**. / **Fuente: solo TrustRadius.** G2 y Capterra **no están soportados** por ahora.
 
-**Pricing:** US$0.003 per review (US$3 per 1,000). Product rows and the beta AI summary are free. / **Precio:** US$0,003 por reseña; las filas de producto y el resumen IA (beta) no se cobran.
+**Pricing:** US$0.0015 per review (US$1.50 per 1,000). Product rows and the beta AI summary are free. / **Precio:** US$0,0015 por reseña (US$1,50 por 1.000); las filas de producto y el resumen IA (beta) no se cobran.
 
 🇬🇧 [English](#english) · 🇪🇸 [Español](#español)
 
@@ -53,6 +53,34 @@ Extrae **reseñas de software B2B desde TrustRadius**. Cada reseña trae la nota
 - *¿G2 y Capterra?* Todavía no, por su antibot fuerte (DataDome y Cloudflare Turnstile). Están en el roadmap.
 - *¿Datos personales?* No se guardan nombres.
 - *¿Es legal?* Solo se extrae contenido público de las reseñas. Revisa los términos de TrustRadius y las leyes de tu país para tu caso.
+
+## 🤖 AI insights (optional) / Análisis con IA (opcional)
+
+Turn on **AI insights** and paste your own **Gemini** key (free tier at [aistudio.google.com](https://aistudio.google.com/apikey)) or your **OpenAI** key. After scraping, the Actor adds one row per product with **sentiment %, top pros and cons, recurring complaints, feature requests, notable quotes and an executive summary**, so you get the main findings from 1,000 reviews in about a minute. The AI row is free. The AI tokens are billed by your provider. It's off by default.
+
+Activa **AI insights** y pega tu key de **Gemini** o de **OpenAI**. Al terminar, el actor agrega una fila por producto con el **% de sentimiento, los pros y contras principales, las quejas que se repiten, lo que piden los clientes y un resumen ejecutivo**. La IA la cobra tu proveedor. Viene desactivado por defecto.
+
+## ❓ FAQ
+
+**Is there a TrustRadius API?**
+TrustRadius has no public reviews API. This scraper works as an unofficial TrustRadius API: export reviews to JSON, CSV, Excel or Google Sheets.
+
+**Is it legal?**
+It only collects publicly visible review content and never reviewer names. Check the terms that apply to your use case.
+
+**¿Funciona en español?**
+Sí. El soporte es en español y el output se puede exportar a Excel.
+
+## 🔗 More scrapers by ener90 / Más scrapers de ener90
+
+- [Mercado Libre Reviews & Questions Scraper](https://apify.com/ener90/mercadolibre-reviews-questions) – opiniones y preguntas de Mercado Libre
+- [Mercado Libre Price Tracker](https://apify.com/ener90/mercadolibre-seller-price-monitor) – monitor de precios de tiendas oficiales de Mercado Libre
+- [Walmart Reviews Scraper](https://apify.com/ener90/walmart-products-reviews) – reseñas y productos de Walmart
+- [Product Hunt Scraper](https://apify.com/ener90/product-hunt-launches) – lanzamientos diarios de Product Hunt
+- Chile Real Estate Scraper (Portal Inmobiliario + TocToc) (`ener90/chile-real-estate-scraper`, coming soon / próximamente) – propiedades en venta y arriendo en Chile
+- AI Review Insights (`ener90/ai-review-insights`, coming soon / próximamente) – análisis de reseñas con IA
+
+Need a custom scraper or a different site? Open an issue in the **Issues** tab. / ¿Necesitas un scraper a medida? Escríbeme en la pestaña **Issues** (soporte en español).
 
 ## 🧩 API & integrations quick start
 
