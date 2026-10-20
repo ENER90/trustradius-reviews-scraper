@@ -59,14 +59,14 @@
         "Google Gemini",
         "OpenAI"
       ],
-      "description": "Leave empty to auto-detect from the key (Gemini keys start with 'AIza')."
+      "description": "Leave empty to auto-detect from the key (keys starting with 'sk-' are OpenAI, others Gemini)."
     },
     "aiApiKey": {
       "title": "AI API key",
       "type": "string",
       "editor": "textfield",
       "isSecret": true,
-      "description": "OpenAI-compatible or Gemini (starts with 'AIza') key. Used only for the AI calls; never logged."
+      "description": "OpenAI-compatible or Gemini key. Used only for the AI calls; never logged."
     },
     "aiBaseUrl": {
       "title": "AI base URL",

@@ -58,7 +58,7 @@ const crawler = new PlaywrightCrawler({
 });
 await crawler.run(products.map((p) => ({ url: pageUrl(p, 1), userData: { product: p, page: 1 } })));
 
-const useGemini = wantAi && (input.aiProvider === 'gemini' || input.aiApiKey!.startsWith('AIza'));
+const useGemini = wantAi && (input.aiProvider === 'gemini' || (!input.aiProvider && /^(AIza|AQ\.)/.test(input.aiApiKey!)));
 if (useGemini) await runAiInsights({ aiInsights: true, aiProvider: 'gemini', aiApiKey: input.aiApiKey, aiModel: input.aiModel === 'gpt-4o-mini' ? undefined : input.aiModel, aiLanguage: input.aiLanguage }, 'trustradius');
 else if (wantAi) {
   for (const p of products) {
