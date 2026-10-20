@@ -1,0 +1,4 @@
+{ "actorSpecification": 1, "fields": {}, "views": {
+  "reviews": { "title": "Reviews", "transformation": { "fields": ["productName", "date", "rating", "ratingNormalized5", "title", "pros", "cons", "useCases", "likelihoodToRecommend", "reviewSource", "reviewUrl"] },
+    "display": { "component": "table", "properties": { "date": { "format": "date" }, "rating": { "label": "Rating /10", "format": "number" }, "ratingNormalized5": { "label": "Rating /5", "format": "number" }, "pros": { "format": "array" }, "cons": { "format": "array" }, "reviewUrl": { "format": "link" } } } },
+  "summaries": { "title": "Products & AI summaries", "transformation": { "fields": ["type", "productName", "ratingValue", "reviewCount", "sentiment", "summary", "topPros", "topCons", "commonComplaints"] }, "display": { "component": "table" } } } }

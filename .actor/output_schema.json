@@ -1,0 +1,3 @@
+{ "actorOutputSchemaVersion": 1, "title": "Software reviews output", "description": "Reviews, product rows and optional AI summaries in the default dataset.",
+  "properties": { "reviews": { "type": "string", "title": "Reviews", "template": "{{links.apiDefaultDatasetUrl}}/items?view=reviews" },
+    "summaries": { "type": "string", "title": "Products & AI summaries", "template": "{{links.apiDefaultDatasetUrl}}/items?view=summaries" } } }
