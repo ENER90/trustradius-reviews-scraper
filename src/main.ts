@@ -9,12 +9,18 @@ interface Input {
 }
 await Actor.init();
 const input = (await Actor.getInput<Input>()) ?? {};
-const max = input.maxReviewsPerProduct ?? 50;
+const maxIn = Number.isFinite(Number(input.maxReviewsPerProduct)) && Number(input.maxReviewsPerProduct) >= 0 ? Math.floor(Number(input.maxReviewsPerProduct)) : 50;
 const now = new Date().toISOString();
-const raw = [...(input.startUrls ?? []).map((u) => (typeof u === 'string' ? u : u.url)), ...(input.products ?? [])];
+const toStr = (u: any): string => String(typeof u === 'object' && u ? u.url ?? '' : u ?? '').trim();
+let raw = [...(Array.isArray(input.startUrls) ? input.startUrls : []).map(toStr), ...(Array.isArray(input.products) ? input.products : []).map(toStr)].filter(Boolean);
+const demo = !raw.length;
+if (demo) { log.warning('No startUrls or products given. Running a short demo with "slack" (5 reviews). Add your own TrustRadius URLs or slugs.'); raw = ['https://www.trustradius.com/products/slack/reviews']; }
+const max = demo ? Math.min(5, maxIn) : maxIn;
 const products: ProductRef[] = [];
-for (const r of raw) { try { const p = parseProduct(r); if (!products.some((x) => x.slug === p.slug)) products.push(p); } catch (e) { log.error((e as Error).message); } }
-if (!products.length) throw new Error('Input error: add at least one TrustRadius product URL or slug (e.g. "slack").');
+const inputErrors: { type: 'error'; input: string; error: string }[] = [];
+for (const r of raw) { try { const p = parseProduct(r); if (!products.some((x) => x.slug === p.slug)) products.push(p); } catch (e) { log.error((e as Error).message); inputErrors.push({ type: 'error', input: r, error: (e as Error).message }); } }
+if (inputErrors.length) await Actor.pushData(inputErrors);
+if (!products.length) { const m = 'None of the given inputs is a TrustRadius product. Use a URL like https://www.trustradius.com/products/slack/reviews or a slug like "slack".'; log.error(m); await Actor.exit({ statusMessage: m }); }
 const wantAi = !!(input.aiSummary && input.aiApiKey);
 if (input.aiSummary && !input.aiApiKey) log.warning('aiSummary=true but no aiApiKey: skipping AI summaries.');
 
@@ -78,4 +84,4 @@ else if (wantAi) {
 }
 const total = [...got.values()].reduce((a, b) => a + b.length, 0);
 await Actor.setValue('OUTPUT', { products: products.map((p) => ({ slug: p.slug, reviews: got.get(p.slug)?.length ?? 0 })), totalReviews: total });
-if (!total) await Actor.fail('No reviews were scraped. See log.'); else await Actor.exit(`Scraped ${total} reviews from ${products.length} product(s).`);
+if (!total) await Actor.exit({ statusMessage: 'No reviews were scraped (product has no reviews, or TrustRadius blocked the request). See the log; try again later.' }); else await Actor.exit(`Scraped ${total} reviews from ${products.length} product(s).`);
