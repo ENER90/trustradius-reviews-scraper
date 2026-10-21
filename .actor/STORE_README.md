@@ -2,6 +2,10 @@
 
 Get B2B software reviews from TrustRadius in a clean table: rating, title, pros, cons, use cases, likelihood to recommend and date, plus the product's overall rating. TrustRadius reviews are long and detailed, which makes them some of the most useful for competitor research. They're also a pain to copy by hand, so I built this.
 
+If you'd rather see it in action first, I recorded a short video tutorial:
+
+https://www.youtube.com/watch?v=IlNBtml4NOs
+
 Reviewer names are never collected.
 
 ![Input form with a TrustRadius product URL](https://raw.githubusercontent.com/ENER90/trustradius-reviews-scraper/main/docs/screenshots/01-input.png)
