@@ -18,7 +18,11 @@
       "title": "Product slugs",
       "type": "array",
       "editor": "stringList",
-      "description": "Alternative to URLs: TrustRadius slugs like slack, hubspot-crm, jira."
+      "description": "Alternative to URLs: TrustRadius slugs like slack, hubspot-crm, jira.",
+      "example": [
+        "slack",
+        "hubspot-crm"
+      ]
     },
     "maxReviewsPerProduct": {
       "title": "Max reviews per product",
@@ -26,26 +30,30 @@
       "default": 50,
       "minimum": 1,
       "maximum": 10000,
-      "description": "TrustRadius shows 10 reviews per page, newest first."
+      "description": "TrustRadius shows 10 reviews per page, newest first.",
+      "prefill": 50
     },
     "includeProductInfo": {
       "title": "Include product info row",
       "type": "boolean",
       "default": true,
-      "description": "One row per product with overall rating and review count."
+      "description": "One row per product with overall rating and review count.",
+      "prefill": true
     },
     "includeReviewerInfo": {
       "title": "Include reviewer role & experience",
       "type": "boolean",
       "default": false,
-      "description": "Job role / company size and years of experience. Reviewer names are never collected."
+      "description": "Job role / company size and years of experience. Reviewer names are never collected.",
+      "prefill": false
     },
     "aiSummary": {
       "title": "AI summary per product",
       "type": "boolean",
       "default": false,
       "sectionCaption": "AI summary (optional)",
-      "description": "Adds one AI row per product (sentiment, top pros/cons, complaints). Needs your own OpenAI-compatible or Gemini API key; US$0.20 per 1,000 reviews analyzed (only when AI insights are on); AI tokens are billed by your provider. Off by default."
+      "description": "Adds one AI row per product (sentiment, top pros/cons, complaints). Needs your own OpenAI-compatible or Gemini API key; US$0.20 per 1,000 reviews analyzed (only when AI insights are on); AI tokens are billed by your provider. Off by default.",
+      "prefill": false
     },
     "aiProvider": {
       "title": "AI provider",
@@ -59,7 +67,8 @@
         "Google Gemini",
         "OpenAI"
       ],
-      "description": "Leave empty to auto-detect from the key (keys starting with 'sk-' are OpenAI, others Gemini)."
+      "description": "Leave empty to auto-detect from the key (keys starting with 'sk-' are OpenAI, others Gemini).",
+      "example": "gemini"
     },
     "aiApiKey": {
       "title": "AI API key",
@@ -73,21 +82,24 @@
       "type": "string",
       "editor": "textfield",
       "default": "https://api.openai.com/v1",
-      "description": "Any OpenAI-compatible endpoint (OpenAI, OpenRouter, xAI, Groq…)."
+      "description": "Any OpenAI-compatible endpoint (OpenAI, OpenRouter, xAI, Groq…).",
+      "prefill": "https://api.openai.com/v1"
     },
     "aiModel": {
       "title": "AI model",
       "type": "string",
       "editor": "textfield",
       "default": "gpt-4o-mini",
-      "description": "Model name for the endpoint."
+      "description": "Model name for the endpoint.",
+      "prefill": "gpt-4o-mini"
     },
     "aiLanguage": {
       "title": "AI output language",
       "type": "string",
       "editor": "textfield",
       "description": "Language of the AI text (e.g. English, Spanish, Portuguese).",
-      "default": "English"
+      "default": "English",
+      "prefill": "English"
     },
     "proxyConfiguration": {
       "title": "Proxy",
@@ -100,7 +112,15 @@
         ],
         "apifyProxyCountry": "US"
       },
-      "description": "Residential proxy recommended (TrustRadius uses Cloudflare)."
+      "description": "Residential proxy recommended (TrustRadius uses Cloudflare).",
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ],
+        "apifyProxyCountry": "US"
+      }
     }
-  }
+  },
+  "description": "Paste a TrustRadius product review URL (or a slug), set how many reviews you want and click Start. The AI summary is optional."
 }
